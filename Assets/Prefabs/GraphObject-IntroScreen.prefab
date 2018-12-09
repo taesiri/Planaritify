@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4971162777962318}
   - component: {fileID: 114335212276526234}
   m_Layer: 0
-  m_Name: GraphObjectIntroScreen
+  m_Name: GraphObject-IntroScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,3 +63,4 @@ MonoBehaviour:
   NumberOfVertices: -1
   GlobalScaleFactor: 3
   ScreenOffset: {x: -0.5, y: -0.5, z: 0}
+  DrawOnStart: 1

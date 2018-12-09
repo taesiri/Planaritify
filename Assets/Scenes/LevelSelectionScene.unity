@@ -434,7 +434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70111b89429d045c09be396964c7fc69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllGraphDB: {fileID: 11400000, guid: d5a453fc5be074ada8e20591f5a30711, type: 2}
   LevelToLoad: 0
   LoadingCircle: {fileID: 27211825}
   ScreenCanvas: {fileID: 141627312}
@@ -845,52 +844,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1939806578}
   m_CullTransparentMesh: 0
---- !u!1001 &2094847945
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4640435092795472, guid: 66cb62a96d9c64974bc0409557b7dd2b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4640435092795472, guid: 66cb62a96d9c64974bc0409557b7dd2b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4640435092795472, guid: 66cb62a96d9c64974bc0409557b7dd2b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4640435092795472, guid: 66cb62a96d9c64974bc0409557b7dd2b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4640435092795472, guid: 66cb62a96d9c64974bc0409557b7dd2b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4640435092795472, guid: 66cb62a96d9c64974bc0409557b7dd2b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4640435092795472, guid: 66cb62a96d9c64974bc0409557b7dd2b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4640435092795472, guid: 66cb62a96d9c64974bc0409557b7dd2b, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1951215056735770, guid: 66cb62a96d9c64974bc0409557b7dd2b, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 66cb62a96d9c64974bc0409557b7dd2b, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &2110927835
 GameObject:
   m_ObjectHideFlags: 0

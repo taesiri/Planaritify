@@ -5,26 +5,63 @@ using UnityEngine;
 [Serializable]
 public class GraphDatabase : ScriptableObject
 {
+	public bool ReadFromFile;
+	public TextAsset DataBaseTextFile;
 	[TextArea(10, 18)] public string GraphDataBaseSource;
+	public int LineMultiplier = 3;
+
+	private String[] _cache;
+
 
 	public string GetEdgeListAt(int selectedGraph)
 	{
-		return GraphDataBaseSource.Split('\n')[(selectedGraph * 3) + 2];
+		if (ReadFromFile)
+		{
+			if (_cache == null)
+			{
+				_cache = DataBaseTextFile.text.Split('\n');
+			}
+
+			return _cache[(selectedGraph * LineMultiplier) + 1];
+		}
+
+		return GraphDataBaseSource.Split('\n')[(selectedGraph * LineMultiplier) + 2];
 	}
 
 	public string GetEmbeddingAt(int selectedGraph)
 	{
-		return GraphDataBaseSource.Split('\n')[(selectedGraph * 3) + 1];
+		if (ReadFromFile)
+		{
+			if (_cache == null)
+			{
+				_cache = DataBaseTextFile.text.Split('\n');
+			}
+
+			return _cache[(selectedGraph * LineMultiplier) + 0];
+		}
+
+		return GraphDataBaseSource.Split('\n')[(selectedGraph * LineMultiplier) + 1];
 	}
 
 	public int GetLevelsBeforeThis(int selectedGraph)
 	{
+		if (LineMultiplier == 2) return -1;
 		if (selectedGraph == 0) return 0;
-		return int.Parse(GraphDataBaseSource.Split('\n')[((selectedGraph - 1) * 3) + 0]);
+		return int.Parse(GraphDataBaseSource.Split('\n')[((selectedGraph - 1) * LineMultiplier) + 0]);
 	}
 
 	public int NumberOfGraphs()
 	{
-		return GraphDataBaseSource.Split('\n').Length / 3;
+		if (ReadFromFile)
+		{
+			if (_cache == null)
+			{
+				_cache = DataBaseTextFile.text.Split('\n');
+			}
+
+			return _cache.Length / LineMultiplier;
+		}
+
+		return GraphDataBaseSource.Split('\n').Length / LineMultiplier;
 	}
 }

@@ -5,32 +5,27 @@ using System.Text.RegularExpressions;
 using UnityEditor.Experimental.UIElements.GraphView;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class GraphObjectScript : MonoBehaviour
 {
 	public GameObject EdgePrefab;
 	public GameObject VertexPrefab;
 	public GameObject WigglerPrefab;
-	
-	public bool GraphConstructed;
-
 	public bool EnableWiggle;
-	
+
 	// TEMP
 	public GraphDatabase GraphDatabase;
 	public int SelectedGraph = 2;
-	public int NumberOfVertices = -1;
 
 	// Scaling and Spacing
 	public float GlobalScaleFactor = 1;
 	public Vector3 ScreenOffset = Vector3.zero;
 	public GraphEmbeddingData EmbeddingData = new GraphEmbeddingData();
-
 	public bool DrawOnStart = true;
+
 	public void Start()
 	{
-		GraphConstructed = false;
-
 		if (DrawOnStart)
 		{
 			DrawGraph(GraphDatabase, SelectedGraph);
@@ -63,11 +58,16 @@ public class GraphObjectScript : MonoBehaviour
 		public Vector3 Offset;
 	}
 
-	public void DrawGraph(GraphDatabase db, int selectedGraph)
+	public void DrawRandomizedGraph()
+	{
+		DrawGraph(GraphDatabase, SelectedGraph, true);
+	}
+
+	public void DrawGraph(GraphDatabase db, int selectedGraph, bool randomized = false)
 	{
 		var edgeList = db.GetEdgeListAt(selectedGraph);
 		var embedding = db.GetEmbeddingAt(selectedGraph);
-		
+
 		var vertexHashSet = new HashSet<Int32>();
 		var edgesList = new List<EdgeData>();
 		// Edge List
@@ -75,7 +75,7 @@ public class GraphObjectScript : MonoBehaviour
 		MatchCollection matches = regex.Matches(edgeList);
 
 		var levelsBeforeThis = db.GetLevelsBeforeThis(selectedGraph);
-		
+
 		foreach (Match match in matches)
 		{
 			var endPoints = match.Groups[1].ToString().Split(',');
@@ -85,7 +85,6 @@ public class GraphObjectScript : MonoBehaviour
 			vertexHashSet.Add(edgeData.Sink);
 			edgesList.Add(edgeData);
 		}
-		NumberOfVertices = vertexHashSet.Max();
 
 		// Vertex List
 		regex = new Regex(@"\{(.*?)\}");
@@ -95,27 +94,37 @@ public class GraphObjectScript : MonoBehaviour
 		foreach (Match match in matches)
 		{
 			var tmp = match.Groups[1].ToString().Split(',');
-			var pos = new Vector3(float.Parse(tmp[0]), float.Parse(tmp[1]), 0);
+			var pos = new Vector3((float) double.Parse(tmp[0]), (float) double.Parse(tmp[1]), 0);
 			positionsList.Add(pos);
 		}
 
 		var scaleOffset = CalculateGraphScale(positionsList);
 		var vertexCounter = 1;
-		
+
+		var otherNodes = new List<Vector3>();
+
 		foreach (var p in positionsList)
 		{
-			var nodePosition = GlobalScaleFactor *
-			                   (ScreenOffset + Vector3.Scale(p - scaleOffset.Offset, scaleOffset.Scale));
-			
-			
-			var node = Instantiate(VertexPrefab, nodePosition,Quaternion.identity);
+
+			var correctPosition = GlobalScaleFactor *
+			                      (ScreenOffset + Vector3.Scale(p - scaleOffset.Offset, scaleOffset.Scale));
+			var spawnPosition = correctPosition;
+
+			if (randomized)
+			{
+				spawnPosition = RandomPosition(1.78f, otherNodes, 0.625f);
+			}
+
+			var node = Instantiate(VertexPrefab, spawnPosition, Quaternion.identity);
 			node.transform.parent = transform;
 			var vScript = node.GetComponent<GraphVertex>();
 			vScript.VertexId = vertexCounter;
-			vScript.LevelId = levelsBeforeThis + vertexCounter;
-			EmbeddingData.Add(nodePosition, vScript);
-			
+			if (levelsBeforeThis == -1) vScript.LevelId = -2;
+			else vScript.LevelId = levelsBeforeThis + vertexCounter;
+			EmbeddingData.Add(correctPosition, vScript);
 			vertexCounter++;
+
+			otherNodes.Add(spawnPosition);
 		}
 
 		foreach (var edgeData in edgesList)
@@ -130,15 +139,40 @@ public class GraphObjectScript : MonoBehaviour
 
 			sourceVertex.AddNewEdge(graphEdge, 0);
 			sinkVertex.AddNewEdge(graphEdge, 1);
-			
+
 			edge.transform.parent = transform;
 		}
-
-		GraphConstructed = true;
 
 		if (EnableWiggle)
 		{
 			EmbeddingData.AttachPrefabToEachNode(WigglerPrefab);
 		}
+	}
+
+	public Vector3 RandomPosition(float radius, List<Vector3> otherNodes, float minDistance)
+	{
+		var remainingTries = 5;
+		while (remainingTries > 0)
+		{
+			var spawnPosition = Random.insideUnitCircle * radius;
+			var temp = float.MaxValue;
+			for (int i = 0; i < otherNodes.Count; i++)
+			{
+				var dist = Vector3.Distance(spawnPosition, otherNodes[i]);
+				if (dist < temp)
+				{
+					temp = dist;
+				}
+			}
+
+			if (temp > minDistance)
+			{
+				return spawnPosition;
+			}
+
+			remainingTries--;
+		}
+
+		return Random.insideUnitCircle * radius;
 	}
 }

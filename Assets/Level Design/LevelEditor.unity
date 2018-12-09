@@ -422,9 +422,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 781037958}
+  - component: {fileID: 781037960}
   - component: {fileID: 781037959}
   m_Layer: 0
-  m_Name: GraphObject
+  m_Name: Level-Designer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -451,19 +452,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 781037957}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dc541d7f7aa244b79374d5ccd80f467, type: 3}
+  m_Script: {fileID: 11500000, guid: c67a365f101884c3391a11622f225973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Database: {fileID: 11400000, guid: 6a8f9a421dc1547de91ea6ee2b0873f8, type: 2}
+--- !u!114 &781037960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 781037957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9e269092dba4831a8385608f0497cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EdgePrefab: {fileID: 1380307477228106, guid: 58c971d9a6c0a41f7a47a43a571dfc62, type: 2}
   VertexPrefab: {fileID: 1951215056735770, guid: 4fbebe6a4d12c45ebbd2d411ef270ac0,
     type: 2}
-  WigglerPrefab: {fileID: 0}
-  EnableWiggle: 0
-  GraphDatabase: {fileID: 11400000, guid: 5495178af67d149f5ac6854eec2a3c66, type: 2}
-  SelectedGraph: -1
-  GlobalScaleFactor: 3
-  ScreenOffset: {x: -0.5, y: -0.5, z: 0}
-  DrawOnStart: 0
+  GlobalScaleFactor: 1
+  ScreenOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &867658017
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +539,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: N
+  m_Text: <Level Editor>
 --- !u!222 &867658020
 CanvasRenderer:
   m_ObjectHideFlags: 0
