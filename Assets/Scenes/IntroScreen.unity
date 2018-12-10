@@ -278,7 +278,7 @@ Prefab:
     - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
         type: 2}
       propertyPath: SelectedGraph
-      value: 29
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
         type: 2}
@@ -295,6 +295,11 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 6f6e4ce5a398941aa90dd95a8bee3cd8,
         type: 2}
+    - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
+        type: 2}
+      propertyPath: EnableWiggle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdffc9c4e08514d5ba2ac6108a53c87e, type: 2}
   m_IsPrefabAsset: 0
@@ -732,6 +737,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1344783179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1035503642231708, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
+    type: 2}
+  m_PrefabInternal: {fileID: 533720411}
+--- !u!114 &1344783180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1344783179}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97a0d39250ca4425994a94bf32afea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1556023620
 GameObject:
   m_ObjectHideFlags: 0

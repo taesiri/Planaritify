@@ -284,12 +284,22 @@ Prefab:
     - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
         type: 2}
       propertyPath: SelectedGraph
-      value: 15
+      value: 245
       objectReference: {fileID: 0}
     - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
         type: 2}
       propertyPath: EnableWiggle
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
+        type: 2}
+      propertyPath: SelectGraphAtRandom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
+        type: 2}
+      propertyPath: DrawOnStart
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdffc9c4e08514d5ba2ac6108a53c87e, type: 2}
@@ -643,6 +653,7 @@ GameObject:
   - component: {fileID: 1181799763}
   - component: {fileID: 1181799765}
   - component: {fileID: 1181799768}
+  - component: {fileID: 1181799769}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -741,6 +752,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InGameMenuPanel: {fileID: 0}
+--- !u!114 &1181799769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1181799762}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97a0d39250ca4425994a94bf32afea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1556023620
 GameObject:
   m_ObjectHideFlags: 0

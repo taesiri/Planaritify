@@ -15,7 +15,7 @@ public class GraphDatabase : ScriptableObject
 	{
 		if (ReadFromFile)
 		{
-			if (_cache == null)
+			if (_cache == null || _cache.Length == 0)
 			{
 				_cache = DataBaseTextFile.text.Split('\n');
 			}
@@ -30,7 +30,7 @@ public class GraphDatabase : ScriptableObject
 	{
 		if (ReadFromFile)
 		{
-			if (_cache == null)
+			if (_cache == null || _cache.Length == 0)
 			{
 				_cache = DataBaseTextFile.text.Split('\n');
 			}
@@ -52,7 +52,7 @@ public class GraphDatabase : ScriptableObject
 	{
 		if (ReadFromFile)
 		{
-			if (_cache == null)
+			if (_cache == null || _cache.Length == 0)
 			{
 				_cache = DataBaseTextFile.text.Split('\n');
 			}

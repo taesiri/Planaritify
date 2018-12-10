@@ -56,11 +56,10 @@ MonoBehaviour:
     type: 2}
   WigglerPrefab: {fileID: 1410320970413840, guid: 68caa723aa1a749c3ae78e107848d334,
     type: 2}
-  GraphConstructed: 0
   EnableWiggle: 0
-  GraphDatabase: {fileID: 11400000, guid: 6f6e4ce5a398941aa90dd95a8bee3cd8, type: 2}
-  SelectedGraph: 9
-  NumberOfVertices: -1
+  SelectGraphAtRandom: 0
+  GraphDatabase: {fileID: 11400000, guid: e9dbfc6d1ff5d44aebc62c30d7d16a27, type: 2}
+  SelectedGraph: 1
   GlobalScaleFactor: 3
   ScreenOffset: {x: -0.5, y: -0.5, z: 0}
   DrawOnStart: 0

@@ -1198,7 +1198,7 @@ MonoBehaviour:
   WigglerPrefab: {fileID: 0}
   EnableWiggle: 0
   SelectGraphAtRandom: 0
-  GraphDatabase: {fileID: 11400000, guid: 5495178af67d149f5ac6854eec2a3c66, type: 2}
+  GraphDatabase: {fileID: 11400000, guid: 6f6e4ce5a398941aa90dd95a8bee3cd8, type: 2}
   SelectedGraph: -1
   GlobalScaleFactor: 3
   ScreenOffset: {x: -0.5, y: -0.5, z: 0}

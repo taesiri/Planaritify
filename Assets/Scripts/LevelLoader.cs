@@ -110,17 +110,17 @@ public class LevelLoader : MonoBehaviour
 		LoadingCircle.transform.localScale = Vector3.zero;
 	}
 
-	public void Update()
-	{
-		if (Input.GetKey(KeyCode.N))
-		{
-			LoadNextLevel();
-		}
-		if (Input.GetKey(KeyCode.P))
-		{
-			LevelToLoad--;
-			LevelToLoad--;
-			LoadNextLevel();
-		}
-	}
+//	public void Update()
+//	{
+//		if (Input.GetKey(KeyCode.N))
+//		{
+//			LoadNextLevel();
+//		}
+//		if (Input.GetKey(KeyCode.P))
+//		{
+//			LevelToLoad--;
+//			LevelToLoad--;
+//			LoadNextLevel();
+//		}
+//	}
 }

@@ -155,7 +155,7 @@ PlayerSettings:
     Standalone: com.Company.ProductName
     iOS: com.taesiri.planaritify
   buildNumber:
-    iOS: 1
+    iOS: 3
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0

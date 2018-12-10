@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e39a84b06284414db95627f196b1708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GraphDB: {fileID: 11400000, guid: 6f6e4ce5a398941aa90dd95a8bee3cd8, type: 2}
+  GraphDB: {fileID: 11400000, guid: e9dbfc6d1ff5d44aebc62c30d7d16a27, type: 2}
   GraphObjectPrefab: {fileID: 1035503642231708, guid: e1e65bb920be94cdd97c9c0bbc1c3f42,
     type: 2}
   LevelText: {fileID: 958460522}
@@ -565,6 +565,7 @@ MonoBehaviour:
   CurrentLevel: -1
   LevelFinishedPanel: {fileID: 0}
   MainMenuButton: []
+  AudioManagerInstance: {fileID: 0}
 --- !u!1 &703859255
 GameObject:
   m_ObjectHideFlags: 0
