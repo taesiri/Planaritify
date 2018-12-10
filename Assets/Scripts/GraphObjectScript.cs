@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using UnityEditor.Experimental.UIElements.GraphView;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GraphObjectScript : MonoBehaviour
@@ -14,6 +11,7 @@ public class GraphObjectScript : MonoBehaviour
 	public GameObject WigglerPrefab;
 	public bool EnableWiggle;
 
+	public bool SelectGraphAtRandom;
 	// TEMP
 	public GraphDatabase GraphDatabase;
 	public int SelectedGraph = 2;
@@ -24,10 +22,18 @@ public class GraphObjectScript : MonoBehaviour
 	public GraphEmbeddingData EmbeddingData = new GraphEmbeddingData();
 	public bool DrawOnStart = true;
 
+	private bool _buildingGraph = false;
+	
 	public void Start()
 	{
 		if (DrawOnStart)
 		{
+			if (SelectGraphAtRandom)
+			{
+				var maxGraphs = GraphDatabase.NumberOfGraphs();
+				SelectedGraph = (int) Random.Range(0, maxGraphs-0.1f);
+			}
+			Debug.Log("Drawing the graph: " + SelectedGraph);
 			DrawGraph(GraphDatabase, SelectedGraph);
 		}
 	}
@@ -60,14 +66,22 @@ public class GraphObjectScript : MonoBehaviour
 
 	public void DrawRandomizedGraph()
 	{
-		DrawGraph(GraphDatabase, SelectedGraph, true);
+		if (!_buildingGraph)
+		{
+			DrawGraph(GraphDatabase, SelectedGraph, true);
+		}
 	}
 
 	public void DrawGraph(GraphDatabase db, int selectedGraph, bool randomized = false)
 	{
+		_buildingGraph = true;
+		
 		var edgeList = db.GetEdgeListAt(selectedGraph);
 		var embedding = db.GetEmbeddingAt(selectedGraph);
-
+		
+//		Debug.Log(edgeList);
+//		Debug.Log(embedding);
+		
 		var vertexHashSet = new HashSet<Int32>();
 		var edgesList = new List<EdgeData>();
 		// Edge List
@@ -135,7 +149,7 @@ public class GraphObjectScript : MonoBehaviour
 			var sourceVertex = EmbeddingData.GetVertexAt(edgeData.Source - 1);
 			var sinkVertex = EmbeddingData.GetVertexAt(edgeData.Sink - 1);
 
-			graphEdge.SetData(sourceVertex.transform, sinkVertex.transform);
+			graphEdge.SetData(sourceVertex, sinkVertex);
 
 			sourceVertex.AddNewEdge(graphEdge, 0);
 			sinkVertex.AddNewEdge(graphEdge, 1);
@@ -149,7 +163,7 @@ public class GraphObjectScript : MonoBehaviour
 		}
 	}
 
-	public Vector3 RandomPosition(float radius, List<Vector3> otherNodes, float minDistance)
+	private Vector3 RandomPosition(float radius, List<Vector3> otherNodes, float minDistance)
 	{
 		var remainingTries = 5;
 		while (remainingTries > 0)

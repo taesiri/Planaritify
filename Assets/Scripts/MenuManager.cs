@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -18,13 +19,14 @@ public class MenuManager : MonoBehaviour
 
 	public void GoHome()
 	{
-	}
-
-	public void SolveGame()
-	{
+		var lvlLoader = FindObjectOfType<LevelLoader>();
+		lvlLoader.UnsubscribeSceneChangeEvent();
+		SceneManager.MoveGameObjectToScene(lvlLoader.gameObject, SceneManager.GetActiveScene());
+		SceneManager.LoadScene("IntroScreen");
 	}
 
 	public void RestartCurrentLevel()
 	{
+		SceneManager.LoadScene(gameObject.scene.name);
 	}
 }

@@ -189,8 +189,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1181799765}
-        m_MethodName: LoadLevelSelectionScene
+      - m_Target: {fileID: 0}
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -277,24 +277,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
         type: 2}
-      propertyPath: SelectedGraph
-      value: 29
-      objectReference: {fileID: 0}
-    - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
-        type: 2}
-      propertyPath: SelectGraphAtRandom
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1035503642231708, guid: fdffc9c4e08514d5ba2ac6108a53c87e, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
-        type: 2}
-      propertyPath: GraphDatabase
+      propertyPath: VertexPrefab
       value: 
-      objectReference: {fileID: 11400000, guid: 6f6e4ce5a398941aa90dd95a8bee3cd8,
+      objectReference: {fileID: 1951215056735770, guid: dcb43511ecf5b4c9f963866be8f57f05,
         type: 2}
+    - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
+        type: 2}
+      propertyPath: SelectedGraph
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
+        type: 2}
+      propertyPath: EnableWiggle
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdffc9c4e08514d5ba2ac6108a53c87e, type: 2}
   m_IsPrefabAsset: 0
@@ -678,7 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bca5f530080c4e4696097dd82d56269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanvasObject: {fileID: 997488370}
+  CanvasObject: {fileID: 0}
 --- !u!20 &1181799766
 Camera:
   m_ObjectHideFlags: 0
@@ -799,8 +795,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: A planar graph is a graph that can be can be drawn on the plane in such
-    a way that its edges intersect only at their endpoints.
+  m_Text: Well, You are an expert! You know what to do!
 --- !u!222 &1556023623
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -875,7 +870,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: START GAME
+  m_Text: PLAY AGAIN
 --- !u!222 &2101857471
 CanvasRenderer:
   m_ObjectHideFlags: 0

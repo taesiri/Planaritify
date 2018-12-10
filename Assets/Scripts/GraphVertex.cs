@@ -10,6 +10,19 @@ public class GraphVertex : MonoBehaviour
 	public int LevelId = -1;
 	
 	public TextMesh AttachedText;
+
+	private GameCore _gameCore;
+	
+	public GameCore GetGameCore
+	{
+		get
+		{
+			if (!_gameCore)
+				_gameCore = FindObjectOfType<GameCore>();
+
+			return _gameCore;
+		}
+	}
 	
 	public void AddNewEdge(GraphEdge edge, int endPoint)
 	{
@@ -32,14 +45,12 @@ public class GraphVertex : MonoBehaviour
 		}
 	}
 
-
 //	public Transform AnchorBaseTransform;
 //	public SpriteRenderer InnerCircle;
 //	public SpriteRenderer OuterCircle;
 
 //	public List<EdgeScript> ConnectedEdges;
 	public List<int> Indexes;
-
 	public float smoothing = 3f;
 	public bool isMoving = false;
 	public bool isMovedSinceStart = false;
@@ -59,8 +70,8 @@ public class GraphVertex : MonoBehaviour
 
 	public void TouchUp() {
 //		InnerCircle.color = new Color (151/255f, 0, 204/255f);
-
 		ForceUpdate ();
+		GetGameCore.IsItIntersected();
 	}
 
 	public void TouchMove(Vector3 pos) {
@@ -108,7 +119,6 @@ public class GraphVertex : MonoBehaviour
 			yield return null;
 		} 
 		isMoving = false;
-
 	}
 
 

@@ -9,6 +9,8 @@ public class LevelLoader : MonoBehaviour
 	public GameObject LoadingCircle;
 	public GameObject ScreenCanvas;
 
+	public int TotalGames = 5;
+	
 	public void Start()
 	{
 		DontDestroyOnLoad(this);
@@ -28,33 +30,57 @@ public class LevelLoader : MonoBehaviour
 	public void LoadNextLevel()
 	{
 		LevelToLoad++;
-		SceneManager.LoadScene("GameScene");
+		if (TotalGames >= LevelToLoad)
+			SceneManager.LoadScene("GameScene");
+		else
+		{
+			Destroy(gameObject);
+			SceneManager.LoadScene("GameOver");
+		}
 	}
 
 	private void LevelChanged(Scene scene1, Scene scene2)
 	{
-		var t = GameObject.FindWithTag("LevelText").GetComponent<Text>();
-		if (t)
-			t.text = LevelToLoad.ToString();
-		
-		
-		var gBS = FindObjectOfType<GraphObjectScript>();
-		if (gBS)
+		if (TotalGames >= LevelToLoad)
 		{
-			if (LevelToLoad >= gBS.GraphDatabase.NumberOfGraphs() - 1)
+			var t = GameObject.FindWithTag("LevelText");
+			if (t)
 			{
-				// Game Finished!
-
+				var tt = GameObject.FindWithTag("LevelText").GetComponent<Text>();
+				tt.text = "<" + LevelToLoad + ">";
 			}
-			else
+
+			var gCore = FindObjectOfType<GameCore>();
+			if (gCore)
 			{
-
-				gBS.SelectedGraph = LevelToLoad;
-				gBS.DrawRandomizedGraph();
-
+				gCore.CurrentLevel = LevelToLoad;
+				gCore.RefToLevelLoader = this;
 			}
+
+			if (scene2.name == "GameScene")
+			{
+				var gBS = FindObjectOfType<GraphObjectScript>();
+				if (gBS)
+				{
+					if (LevelToLoad >= gBS.GraphDatabase.NumberOfGraphs() - 1)
+					{
+						// Game Finished!
+					}
+					else
+					{
+						gBS.SelectedGraph = LevelToLoad;
+						gBS.DrawRandomizedGraph();
+						Debug.Log("HEREE222");
+					}
+				}
+			}
+
 		}
+	}
 
+	public void UnsubscribeSceneChangeEvent()
+	{
+		SceneManager.activeSceneChanged -= LevelChanged;
 	}
 
 	IEnumerator LoadLevelAsyncScene(float time)
@@ -89,6 +115,12 @@ public class LevelLoader : MonoBehaviour
 	{
 		if (Input.GetKey(KeyCode.N))
 		{
+			LoadNextLevel();
+		}
+		if (Input.GetKey(KeyCode.P))
+		{
+			LevelToLoad--;
+			LevelToLoad--;
 			LoadNextLevel();
 		}
 	}

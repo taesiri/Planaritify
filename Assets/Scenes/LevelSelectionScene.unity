@@ -437,6 +437,7 @@ MonoBehaviour:
   LevelToLoad: 0
   LoadingCircle: {fileID: 27211825}
   ScreenCanvas: {fileID: 141627312}
+  TotalGames: 255
 --- !u!4 &360658727
 Transform:
   m_ObjectHideFlags: 0
@@ -556,7 +557,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8fabc54bd98549cab707e7050cd20af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameState: 4
+  _gameState: 4
+  ListOfVertices: []
+  ListOfEdges: []
+  CurrentLevel: -1
 --- !u!1 &958460520
 GameObject:
   m_ObjectHideFlags: 0

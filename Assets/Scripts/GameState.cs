@@ -1,5 +1,5 @@
 ﻿public enum GameState {
-    BeforeStart,
+    BeforePlaying,
     Playing,
     Ended,
     Paused,

@@ -9,9 +9,7 @@ public class GraphDatabase : ScriptableObject
 	public TextAsset DataBaseTextFile;
 	[TextArea(10, 18)] public string GraphDataBaseSource;
 	public int LineMultiplier = 3;
-
 	private String[] _cache;
-
 
 	public string GetEdgeListAt(int selectedGraph)
 	{
