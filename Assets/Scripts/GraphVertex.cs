@@ -64,6 +64,8 @@ public class GraphVertex : MonoBehaviour
 //		InnerCircle.color = Color.green;
 		if (VertexType == VertexType.LevelScreen)
 		{
+//			FindObjectOfType<GameCore>()
+			FindObjectOfType<GameCore>().DisableVertexTexts();
 			FindObjectOfType<LevelLoader>().LoadLevel(VertexId);
 		}
 	}

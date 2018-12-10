@@ -189,8 +189,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1181799768}
-        m_MethodName: GoHome
+      - m_Target: {fileID: 1181799765}
+        m_MethodName: LoadLevelSelectionScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -277,19 +277,38 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
         type: 2}
-      propertyPath: VertexPrefab
+      propertyPath: SelectedGraph
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
+        type: 2}
+      propertyPath: SelectGraphAtRandom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035503642231708, guid: fdffc9c4e08514d5ba2ac6108a53c87e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
+        type: 2}
+      propertyPath: GraphDatabase
       value: 
-      objectReference: {fileID: 1951215056735770, guid: dcb43511ecf5b4c9f963866be8f57f05,
+      objectReference: {fileID: 11400000, guid: 0760f2fcb760c448fbcf1a9a37c87d12,
         type: 2}
     - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
         type: 2}
-      propertyPath: SelectedGraph
-      value: 15
+      propertyPath: DrawOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
         type: 2}
       propertyPath: EnableWiggle
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335212276526234, guid: fdffc9c4e08514d5ba2ac6108a53c87e,
+        type: 2}
+      propertyPath: GlobalScaleFactor
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdffc9c4e08514d5ba2ac6108a53c87e, type: 2}
@@ -476,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &997488371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,7 +661,6 @@ GameObject:
   - component: {fileID: 1181799764}
   - component: {fileID: 1181799763}
   - component: {fileID: 1181799765}
-  - component: {fileID: 1181799768}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -675,7 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bca5f530080c4e4696097dd82d56269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanvasObject: {fileID: 0}
+  CanvasObject: {fileID: 997488370}
 --- !u!20 &1181799766
 Camera:
   m_ObjectHideFlags: 0
@@ -729,18 +747,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1181799768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1181799762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb49b26afab164b4cb2c4d72e10c6752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InGameMenuPanel: {fileID: 0}
 --- !u!1 &1556023620
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +814,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Well, You are an expert! You know what to do!
+  m_Text: A planar graph is a graph that can be can be drawn on the plane in such
+    a way that its edges intersect only at their endpoints.
 --- !u!222 &1556023623
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -883,7 +890,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GO HOME
+  m_Text: START GAME
 --- !u!222 &2101857471
 CanvasRenderer:
   m_ObjectHideFlags: 0

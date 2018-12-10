@@ -70,7 +70,6 @@ public class LevelLoader : MonoBehaviour
 					{
 						gBS.SelectedGraph = LevelToLoad;
 						gBS.DrawRandomizedGraph();
-						Debug.Log("HEREE222");
 					}
 				}
 			}

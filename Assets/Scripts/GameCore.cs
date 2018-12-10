@@ -37,12 +37,14 @@ public class GameCore : MonoBehaviour
 	public GameObject LevelFinishedPanel;
 	public GameObject[] MainMenuButton;
 
+	public AudioManager AudioManagerInstance;
+	
 	private void GameStateUpdate()
 	{
 		if (GameState == GameState.Playing)
 		{
 			if (!IsInvoking("HandleGameState"))
-				InvokeRepeating("HandleGameState", 2f, 1.5f);
+				InvokeRepeating("HandleGameState", 2f, 0.5f);
 		}
 	}
 
@@ -121,8 +123,6 @@ public class GameCore : MonoBehaviour
 		StartGame();
 	}
 
-
-
 	private void GetVerticesAndEdges()
 	{
 		ListOfVertices = FindObjectsOfType<GraphVertex>().ToList();
@@ -164,6 +164,7 @@ public class GameCore : MonoBehaviour
 	public void LevelFinished()
 	{
 		GameState = GameState.Ended;
+		AudioManagerInstance.PlaySuccessSound();
 		PlayerPrefs.SetInt(CurrentLevel.ToString(), 1);
 		StartCoroutine(ZoomCameraIn());
 		LevelFinishedPanel.SetActive(true);
@@ -350,11 +351,19 @@ public class GameCore : MonoBehaviour
 			c.a = f;
 			textToFade.color = c;
 			yield return new WaitForSeconds(speed);
-			;
 		}
 
 		var fc = textToFade.color;
 		fc.a = 0;
 		textToFade.color = fc;
+	}
+
+	public void DisableVertexTexts()
+	{
+		var gvs = FindObjectsOfType<GraphVertex>();
+		foreach (var graphVertex in gvs)
+		{
+			graphVertex.AttachedText.text = "";
+		}
 	}
 }

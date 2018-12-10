@@ -20,8 +20,11 @@ public class MenuManager : MonoBehaviour
 	public void GoHome()
 	{
 		var lvlLoader = FindObjectOfType<LevelLoader>();
-		lvlLoader.UnsubscribeSceneChangeEvent();
-		SceneManager.MoveGameObjectToScene(lvlLoader.gameObject, SceneManager.GetActiveScene());
+		if (lvlLoader)
+		{
+			lvlLoader.UnsubscribeSceneChangeEvent();
+			SceneManager.MoveGameObjectToScene(lvlLoader.gameObject, SceneManager.GetActiveScene());
+		}
 		SceneManager.LoadScene("IntroScreen");
 	}
 

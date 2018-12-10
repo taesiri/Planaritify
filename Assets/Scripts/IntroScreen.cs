@@ -13,7 +13,7 @@ public class IntroScreen : MonoBehaviour
     
     IEnumerator ZoomCameraIn()
     {
-        for (float f = 5f; f >= 0.01f; f -= 0.1f)
+        for (float f = 5f; f >= 0.01f; f -= 0.2f)
         {
             Camera.main.orthographicSize = f;
             yield return null;
