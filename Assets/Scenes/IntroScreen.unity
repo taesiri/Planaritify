@@ -820,8 +820,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: A planar graph is a graph that can be can be drawn on the plane in such
-    a way that its edges intersect only at their endpoints.
+  m_Text: A planar graph is a graph that can be drawn on the plane in such a way that
+    its edges intersect only at their endpoints.
 --- !u!222 &1556023623
 CanvasRenderer:
   m_ObjectHideFlags: 0
