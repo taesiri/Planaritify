@@ -19,17 +19,24 @@ public class MenuManager : MonoBehaviour
 
 	public void GoHome()
 	{
+		AdAnalyticsObject.GetInstance.ShowVideoAd();
+		
 		var lvlLoader = FindObjectOfType<LevelLoader>();
 		if (lvlLoader)
 		{
 			lvlLoader.UnsubscribeSceneChangeEvent();
 			SceneManager.MoveGameObjectToScene(lvlLoader.gameObject, SceneManager.GetActiveScene());
 		}
+
 		SceneManager.LoadScene("IntroScreen");
 	}
 
 	public void RestartCurrentLevel()
 	{
+		AdAnalyticsObject.GetInstance.ShowVideoAd();
 		SceneManager.LoadScene(gameObject.scene.name);
+
+		var gCore = FindObjectOfType<GameCore>();
+		if(gCore) AdAnalyticsObject.GetInstance.LogLevelRestarted(gCore.CurrentLevel.ToString());
 	}
 }

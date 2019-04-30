@@ -11,6 +11,11 @@ public class IntroScreen : MonoBehaviour
         Application.targetFrameRate = 1000;
     }
 
+    private void Start()
+    {
+        AdAnalyticsObject.GetInstance.LogGameStarted();
+    }
+
     public void LoadLevelSelectionScene()
     {
         canvasObject.SetActive(false);

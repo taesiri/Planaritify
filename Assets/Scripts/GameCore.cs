@@ -74,6 +74,7 @@ public class GameCore : MonoBehaviour
 	private void StartGame()
 	{
 		GameState = GameState.Playing;
+		AdAnalyticsObject.GetInstance.LogLevelStart(CurrentLevel.ToString());
 	}
 
 	private void FixGraphLayout()
@@ -173,6 +174,9 @@ public class GameCore : MonoBehaviour
 		StartCoroutine(ZoomCameraIn());
 		LevelFinishedPanel.SetActive(true);
 
+		AdAnalyticsObject.GetInstance.LogLevelCompleted(CurrentLevel.ToString(), Time.timeSinceLevelLoad);
+
+		
 		foreach (var mGameObject in MainMenuButton)
 		{
 			mGameObject.SetActive(false);

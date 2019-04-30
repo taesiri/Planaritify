@@ -17,6 +17,8 @@ public class LevelSelection : MonoBehaviour
 	{
 		_numberOfGraphs = GraphDB.NumberOfGraphs();
 
+		AdAnalyticsObject.GetInstance.LogLevelSelectionScreen();
+		
 		LoadNextGraph();
 	}
 	
