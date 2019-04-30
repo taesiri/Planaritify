@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GraphVertex : MonoBehaviour
@@ -9,7 +10,7 @@ public class GraphVertex : MonoBehaviour
 	public VertexType VertexType;
 	public int LevelId = -1;
 	
-	public TextMesh AttachedText;
+	public TextMeshPro AttachedText;
 
 	private GameCore _gameCore;
 	

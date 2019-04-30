@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -46,8 +47,8 @@ public class LevelLoader : MonoBehaviour
 			var t = GameObject.FindWithTag("LevelText");
 			if (t)
 			{
-				var tt = GameObject.FindWithTag("LevelText").GetComponent<Text>();
-				tt.text = "<" + LevelToLoad + ">";
+				var tmpComponent = t.GetComponent<TextMeshProUGUI>();
+				tmpComponent.text = "<" + LevelToLoad + ">";
 			}
 
 			var gCore = FindObjectOfType<GameCore>();
@@ -109,18 +110,4 @@ public class LevelLoader : MonoBehaviour
 		} while (currentTime <= time);
 		LoadingCircle.transform.localScale = Vector3.zero;
 	}
-
-//	public void Update()
-//	{
-//		if (Input.GetKey(KeyCode.N))
-//		{
-//			LoadNextLevel();
-//		}
-//		if (Input.GetKey(KeyCode.P))
-//		{
-//			LevelToLoad--;
-//			LevelToLoad--;
-//			LoadNextLevel();
-//		}
-//	}
 }

@@ -1,6 +1,6 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelSelection : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class LevelSelection : MonoBehaviour
 	private int _currentGraphId = -1;
 	private GameObject _currentGraph;
 
-	public Text LevelText;
+	public TextMeshProUGUI levelText;
 
 	public void Start()
 	{
@@ -32,29 +32,23 @@ public class LevelSelection : MonoBehaviour
 		LoadGraph(_currentGraphId);
 ;	}
 
-	public void LoadGraph(int id)
+	private void LoadGraph(int id)
 	{
 		CleanCurrentGraph();
-		LevelText.text = (1+_currentGraphId).ToString();
+		levelText.text = (1+_currentGraphId).ToString();
 		
 		var newGraph = Instantiate(GraphObjectPrefab, Vector3.zero, Quaternion.identity);
 		newGraph.name = String.Format("Graph Object {0}", id);
 		newGraph.GetComponent<GraphObjectScript>().DrawGraph(GraphDB, _currentGraphId);
 		_currentGraph = newGraph;
 	}
-	
-	public void CleanCurrentGraph()
+
+	private void CleanCurrentGraph()
 	{
 		Destroy(_currentGraph);
 	}
 
-	public int CurrentGraph
-	{
-		get { return _currentGraphId; }
-	}
-	
-	public int LevelsBeforeCurrentGraph
-	{
-		get { return GraphDB.GetLevelsBeforeThis(_currentGraphId); }
-	}
+	public int CurrentGraph => _currentGraphId;
+
+	public int LevelsBeforeCurrentGraph => GraphDB.GetLevelsBeforeThis(_currentGraphId);
 }

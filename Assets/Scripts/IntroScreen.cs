@@ -1,13 +1,21 @@
 ﻿using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class IntroScreen : MonoBehaviour
 {
-    public GameObject CanvasObject;
+    public GameObject canvasObject;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 1000;
+    }
+
     public void LoadLevelSelectionScene()
     {
-        CanvasObject.SetActive(false);
+        canvasObject.SetActive(false);
         StartCoroutine(ZoomCameraIn());
     }
     

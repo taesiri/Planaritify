@@ -3,31 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameCore : MonoBehaviour
 {
-	RaycastHit2D _hit;
-	readonly Vector2[] _touches = new Vector2[5];
-	readonly GraphVertex[] _vertices = new GraphVertex[5];
+	private RaycastHit2D _hit;
+	private readonly Vector2[] _touches = new Vector2[5];
+	private readonly GraphVertex[] _vertices = new GraphVertex[5];
 
-	[SerializeField] private GameState _gameState;
+	[SerializeField] private GameState gameState;
 
-	public GameState GameState
+	private GameState GameState
 	{
-		get { return _gameState; }
+		get => gameState;
 		set
 		{
-			_gameState = value;
+			gameState = value;
 			GameStateUpdate();
 		}
 	}
 
 	public LevelLoader RefToLevelLoader { get; set; }
 
-	public List<GraphVertex> ListOfVertices;
-	public List<GraphEdge> ListOfEdges;
+	public List<GraphVertex> listOfVertices;
+	public List<GraphEdge> listOfEdges;
 
 	private int _embarrassingSituationCounter;
 
@@ -87,7 +88,7 @@ public class GameCore : MonoBehaviour
 
 		while (!isSelfIntersected)
 		{
-			foreach (var graphVertex in ListOfVertices)
+			foreach (var graphVertex in listOfVertices)
 			{
 				var respawnPosition = Random.insideUnitCircle * 1.78f;
 				graphVertex.MoveTo(respawnPosition, 3f);
@@ -96,7 +97,7 @@ public class GameCore : MonoBehaviour
 			var isMoving = true;
 			while (isMoving)
 			{
-				foreach (var graphVertex in ListOfVertices)
+				foreach (var graphVertex in listOfVertices)
 				{
 					if (graphVertex.isMoving)
 					{
@@ -125,8 +126,8 @@ public class GameCore : MonoBehaviour
 
 	private void GetVerticesAndEdges()
 	{
-		ListOfVertices = FindObjectsOfType<GraphVertex>().ToList();
-		ListOfEdges = FindObjectsOfType<GraphEdge>().ToList();
+		listOfVertices = FindObjectsOfType<GraphVertex>().ToList();
+		listOfEdges = FindObjectsOfType<GraphEdge>().ToList();
 	}
 
 	public void Update()
@@ -265,19 +266,19 @@ public class GameCore : MonoBehaviour
 
 	public bool IsItIntersected()
 	{
-		if (ListOfEdges == null || ListOfVertices == null)
+		if (listOfEdges == null || listOfVertices == null)
 		{
 			GetVerticesAndEdges();
 		}
 
-		if (ListOfEdges.Count == 0 || ListOfVertices.Count == 0)
+		if (listOfEdges.Count == 0 || listOfVertices.Count == 0)
 		{
 			GetVerticesAndEdges();
 		}
 
-		foreach (var currentEdge in ListOfEdges)
+		foreach (var currentEdge in listOfEdges)
 		{
-			foreach (var otherEdge in ListOfEdges)
+			foreach (var otherEdge in listOfEdges)
 			{
 				if (currentEdge.GetEdgeId == otherEdge.GetEdgeId)
 					continue;
