@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ public class GameCore : MonoBehaviour
 
 	[SerializeField] private GameState gameState;
 
+	public TextMeshProUGUI LevelNameText;
+	
 	private GameState GameState
 	{
 		get => gameState;
@@ -32,7 +35,7 @@ public class GameCore : MonoBehaviour
 
 	private int _embarrassingSituationCounter;
 
-	public Text EmbrassingText;
+	public TextMeshProUGUI EmbrassingText;
 	public int CurrentLevel = -1;
 
 	public GameObject LevelFinishedPanel;
@@ -68,7 +71,7 @@ public class GameCore : MonoBehaviour
 		}
 	}
 
-	public void StartGame()
+	private void StartGame()
 	{
 		GameState = GameState.Playing;
 	}
@@ -181,7 +184,7 @@ public class GameCore : MonoBehaviour
 		RefToLevelLoader.LoadNextLevel();
 	}
 
-	public void HandleTouchInputAndMovement()
+	private void HandleTouchInputAndMovement()
 	{
 		foreach (Touch t in Input.touches)
 		{
@@ -227,7 +230,7 @@ public class GameCore : MonoBehaviour
 		}
 	}
 
-	public void HandleTouchDown()
+	private void HandleTouchDown()
 	{
 		foreach (Touch t in Input.touches)
 		{
@@ -358,6 +361,38 @@ public class GameCore : MonoBehaviour
 		fc.a = 0;
 		textToFade.color = fc;
 	}
+	
+	
+	IEnumerator FadeInText(TextMeshProUGUI textToFadeIn, float speed)
+	{
+		for (float f = 0f; f <= 1; f += 0.1f)
+		{
+			Color c = textToFadeIn.color;
+			c.a = f;
+			textToFadeIn.color = c;
+			yield return new WaitForSeconds(speed);
+			;
+		}
+
+		var fc = textToFadeIn.color;
+		fc.a = 1;
+		textToFadeIn.color = fc;
+	}
+
+	IEnumerator FadeOutText(TextMeshProUGUI textToFade, float speed)
+	{
+		for (float f = 1f; f >= 0; f -= 0.1f)
+		{
+			Color c = textToFade.color;
+			c.a = f;
+			textToFade.color = c;
+			yield return new WaitForSeconds(speed);
+		}
+
+		var fc = textToFade.color;
+		fc.a = 0;
+		textToFade.color = fc;
+	}
 
 	public void DisableVertexTexts()
 	{
@@ -366,5 +401,10 @@ public class GameCore : MonoBehaviour
 		{
 			graphVertex.AttachedText.text = "";
 		}
+	}
+
+	public void UpdateCurrentLevelText(int currentLevel)
+	{
+		LevelNameText.text = "<" + currentLevel + ">";
 	}
 }

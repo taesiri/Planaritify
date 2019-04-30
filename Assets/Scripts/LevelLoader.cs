@@ -44,20 +44,14 @@ public class LevelLoader : MonoBehaviour
 	{
 		if (TotalGames >= LevelToLoad)
 		{
-			var t = GameObject.FindWithTag("LevelText");
-			if (t)
-			{
-				var tmpComponent = t.GetComponent<TextMeshProUGUI>();
-				tmpComponent.text = "<" + LevelToLoad + ">";
-			}
-
 			var gCore = FindObjectOfType<GameCore>();
 			if (gCore)
 			{
 				gCore.CurrentLevel = LevelToLoad;
 				gCore.RefToLevelLoader = this;
+				gCore.UpdateCurrentLevelText(LevelToLoad);
 			}
-
+			
 			if (scene2.name == "GameScene")
 			{
 				var gBS = FindObjectOfType<GraphObjectScript>();
