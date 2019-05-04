@@ -168,7 +168,7 @@ PlayerSettings:
     iPhone: com.taesiri.isitplanar
   buildNumber:
     iPhone: 4
-  AndroidBundleVersionCode: 5
+  AndroidBundleVersionCode: 6
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1

@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
+using TapsellSDK;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class AdAnalyticsObject : MonoBehaviour
 {
     private static AdAnalyticsObject _instance;
     public static AdAnalyticsObject GetInstance => _instance;
+    private TapsellAd _tapSellVideoAd;
+    private TapsellAd _tapsellBanner;
 
     private void Awake()
     {
@@ -18,19 +22,168 @@ public class AdAnalyticsObject : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(gameObject);
+        
+        InvokeRepeating(nameof(ShootBannerAd), 60 , 180);
     }
 
     public void ShowVideoAd()
     {
         var unityStats = Advertisement.IsReady("rewardedVideo");
 
-        if (unityStats)
+        if (!unityStats && _tapSellVideoAd == null)
         {
-            ShootUnityAdsVideo();
+            QueryTapsellVideoAd();
+        }
+        else
+        {
+            if (unityStats)
+            {
+                var dice = Random.Range(0, 100);
+                Debug.Log("Dice Value:" + dice);
+                if (dice < 50)
+                    ShootUnityAdsVideo();
+                else
+                    ShootTapsellVideo();
+            }
+            else
+            {
+                ShootTapsellVideo();
+            }
         }
     }
 
-    public void ShootUnityAdsVideo()
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void PreloadAds()
+    {
+        if (_tapSellVideoAd == null)
+        {
+            QueryTapsellVideoAd();
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        PreloadAds();
+    }
+
+    private void QueryTapsellVideoAd()
+    {
+        Tapsell.requestAd("5ccddbb75b60f3000104b7e4", false,
+            (TapsellAd result) =>
+            {
+                // onAdAvailable
+                Debug.Log("Action: onAdAvailable");
+                _tapSellVideoAd = result; // store this to show the ad later
+            },
+
+            (string zoneId) =>
+            {
+                // onNoAdAvailable
+                Debug.Log("No Ad Available");
+            },
+
+            (TapsellError error) =>
+            {
+                // onError
+                Debug.Log("Tapsell Error");
+                Debug.Log(error.error);
+            },
+
+            (string zoneId) =>
+            {
+                // onNoNetwork
+                Debug.Log("No Network");
+            },
+
+            (TapsellAd result) =>
+            {
+                // onExpiring
+                Debug.Log("Expiring");
+                // this ad is expired, you must download a new ad for this zone
+            }
+        );
+    }
+
+    private void QueryBannerAd()
+    {
+        Tapsell.requestAd("5ccddc055b60f3000104b7e5", false,
+            (TapsellAd result) =>
+            {
+                // onAdAvailable
+                Debug.Log("Action: onAdAvailable");
+                _tapsellBanner = result; // store this to show the ad later
+            },
+
+            (string zoneId) =>
+            {
+                // onNoAdAvailable
+                Debug.Log("No Ad Available");
+            },
+
+            (TapsellError error) =>
+            {
+                // onError
+                Debug.Log("Tapsell Error");
+                Debug.Log(error.error);
+            },
+
+            (string zoneId) =>
+            {
+                // onNoNetwork
+                Debug.Log("No Network");
+            },
+
+            (TapsellAd result) =>
+            {
+                // onExpiring
+                Debug.Log("Expiring");
+                // this ad is expired, you must download a new ad for this zone
+            }
+        );
+    }
+    private void ShootBannerAd()
+    {
+        TapsellShowOptions showOptions = new TapsellShowOptions
+        {
+            backDisabled = false,
+            immersiveMode = false,
+            rotationMode = TapsellShowOptions.ROTATION_UNLOCKED,
+            showDialog = true
+        };
+
+        if (_tapsellBanner != null)
+        {
+            Tapsell.showAd(_tapsellBanner, showOptions);
+            LogVideoAdShowed("TapsellBanner");
+        }
+        
+        QueryBannerAd();
+    }
+
+    private void ShootTapsellVideo()
+    {
+        TapsellShowOptions showOptions = new TapsellShowOptions
+        {
+            backDisabled = false,
+            immersiveMode = false,
+            rotationMode = TapsellShowOptions.ROTATION_UNLOCKED,
+            showDialog = true
+        };
+
+        if (_tapSellVideoAd != null)
+        {
+            Tapsell.showAd(_tapSellVideoAd, showOptions);
+            LogVideoAdShowed("Tapsell");
+        }
+
+        QueryTapsellVideoAd();
+    }
+
+    private void ShootUnityAdsVideo()
     {
         if (Advertisement.IsReady("video"))
         {
@@ -60,6 +213,11 @@ public class AdAnalyticsObject : MonoBehaviour
 
     public void Start()
     {
+        Tapsell.initialize("leqinaomplngfjhbdfrgncnnhfcpmopgdjbahoknkfhabhodsorkpiakdprcdnplddmcoq");
+        Tapsell.setRewardListener(OnTapsellVideoResult);
+
+        PreloadAds();
+
         Firebase.Analytics.FirebaseAnalytics.LogEvent("AnalyticsObjectInitialized", "Initialized", 1);
     }
 
@@ -95,7 +253,7 @@ public class AdAnalyticsObject : MonoBehaviour
         });
     }
 
-    public void LogVideoAdShowed(string provider)
+    private void LogVideoAdShowed(string provider)
     {
         Firebase.Analytics.FirebaseAnalytics.LogEvent("AdDisplayed", "Provider", provider);
 
@@ -103,6 +261,14 @@ public class AdAnalyticsObject : MonoBehaviour
         {
             {"Provider", provider}
         });
+    }
+
+    private void OnTapsellVideoResult(TapsellAdFinishedResult result)
+    {
+        if (result.rewarded && result.completed)
+        {
+
+        }
     }
 
     public void LogLevelSelectionScreen()
