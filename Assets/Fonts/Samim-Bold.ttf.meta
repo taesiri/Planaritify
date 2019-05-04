@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 1c07352b87074453fa63f90518997e71
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Samim
+  fontNames:
+  - Samim
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0a1dd846731db4565986a9f87ef6c6dc, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "444623400220",
+    "firebase_url": "https://planaritify-1fa4d.firebaseio.com",
+    "project_id": "planaritify-1fa4d",
+    "storage_bucket": "planaritify-1fa4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444623400220:android:0e1589555a288e22",
+        "android_client_info": {
+          "package_name": "com.taesiri.planaritify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444623400220-7cpmevn5rfl2jsnatdduokpbsr0d95ds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC86YT5JQZdVKjXDureUz_ECRV738lD820"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444623400220-7cpmevn5rfl2jsnatdduokpbsr0d95ds.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "444623400220-tlnp6va384dbfblna8fghls0g9k09ef8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.taesiri.isitplanar"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
